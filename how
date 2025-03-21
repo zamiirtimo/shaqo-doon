@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="so">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khaalid Shop - Ecommerce</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; text-align: center; }
+        header { background-color: #333; color: white; padding: 15px; }
+        input { padding: 10px; width: 80%; margin: 10px 0; }
+        #products { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .product { background-color: white; padding: 10px; border-radius: 5px; width: 200px; cursor: pointer; }
+        .product img { width: 100%; border-radius: 5px; }
+        footer { margin-top: 20px; background-color: #333; color: white; padding: 10px; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Khaalid Shop</h1>
+        <input type="text" id="search" placeholder="Raadi alaabta...">
+    </header>
+
+    <section id="products">
+        <div class="product" onclick="showProduct(1)">
+            <img src="product1.jpg" alt="Web Dev Course">
+            <h3>Web Development Course</h3>
+            <p>Qiimaha: $15 (Zaad)</p>
+        </div>
+
+        <div class="product" onclick="showProduct(2)">
+            <img src="product2.jpg" alt="Graphic Design Course">
+            <h3>Graphic Design Course</h3>
+            <p>Qiimaha: $10 (Zaad)</p>
+        </div>
+
+        <div class="product" onclick="showProduct(3)">
+            <img src="product3.jpg" alt="Adobe Premiere Course">
+            <h3>Adobe Premiere Course</h3>
+            <p>Qiimaha: $20 (Zaad)</p>
+        </div>
+    </section>
+
+    <section id="product-details" style="display: none;">
+        <h2 id="product-title"></h2>
+        <iframe id="product-video" width="600" height="340" frameborder="0" allowfullscreen></iframe>
+        <p id="product-price"></p>
+        <button id="buy-button">Iibso Hadda</button>
+        <button onclick="goBack()">⬅️ Back</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Khaalid Shop. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        let productData = {
+            1: { 
+                title: "Web Development Course", 
+                price: 15, 
+                video: "https://www.youtube.com/embed/hIYmHoo-PNY"
+            },
+            2: { 
+                title: "Graphic Design Course", 
+                price: 10, 
+                video: "https://www.youtube.com/embed/zhpINwz-7vE"
+            },
+            3: { 
+                title: "Adobe Premiere Course", 
+                price: 20, 
+                video: "https://www.youtube.com/embed/1zXqo2WcOew"
+            }
+        };
+
+        function showProduct(productId) {
+            document.getElementById("products").style.display = "none";
+            document.getElementById("product-details").style.display = "block";
+            let product = productData[productId];
+            document.getElementById("product-title").innerText = product.title;
+            document.getElementById("product-video").src = product.video;
+            document.getElementById("product-price").innerText = "Qiimaha: $" + product.price + " (Zaad)";
+            document.getElementById("buy-button").onclick = function() {
+                let zaadCode = `*880*633412658*${product.price}#`;
+                alert("Fadlan bixi lacagta adigoo ku qoraya code-kan: " + zaadCode);
+                window.location.href = "tel:" + zaadCode;
+            };
+        }
+
+        function goBack() {
+            document.getElementById("products").style.display = "flex";
+            document.getElementById("product-details").style.display = "none";
+        }
+    </script>
+</body>
+</html>
